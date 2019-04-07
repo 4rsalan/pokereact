@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c5c2280b-0795-4c12-b6b7-7103a5168cef" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/terminal.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
     </list>
@@ -48,8 +47,8 @@
       <file leaf-file-name="index.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-16">
-              <caret line="63" column="23" lean-forward="true" selection-start-line="63" selection-start-column="23" selection-end-line="63" selection-end-column="23" />
+            <state relative-caret-position="80">
+              <caret line="72" column="4" selection-start-line="72" selection-start-column="4" selection-end-line="72" selection-end-column="4" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
               </folding>
@@ -183,7 +182,7 @@
       <option name="presentableId" value="Default" />
       <updated>1554418047676</updated>
       <workItem from="1554418049039" duration="5564000" />
-      <workItem from="1554483382084" duration="18487000" />
+      <workItem from="1554483382084" duration="20649000" />
     </task>
     <task id="LOCAL-00001" summary="Created empty components">
       <created>1554605882928</created>
@@ -192,11 +191,25 @@
       <option name="project" value="LOCAL" />
       <updated>1554605882928</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Created empty components">
+      <created>1554610086781</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1554610086781</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Fixed input rendering formatting and added stylesheet">
+      <created>1554612898648</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1554612898648</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="24051000" />
+    <option name="totallyTimeSpent" value="26213000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1295" height="704" extended-state="6" />
@@ -258,7 +271,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Files uploaded" />
     <MESSAGE value="Created empty components" />
-    <option name="LAST_COMMIT_MESSAGE" value="Created empty components" />
+    <MESSAGE value="Fixed input rendering formatting and added stylesheet" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed input rendering formatting and added stylesheet" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/style.css">
@@ -339,8 +353,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-16">
-          <caret line="63" column="23" lean-forward="true" selection-start-line="63" selection-start-column="23" selection-end-line="63" selection-end-column="23" />
+        <state relative-caret-position="80">
+          <caret line="72" column="4" selection-start-line="72" selection-start-column="4" selection-end-line="72" selection-end-column="4" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
           </folding>

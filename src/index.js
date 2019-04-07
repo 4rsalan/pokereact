@@ -49,8 +49,11 @@ class CreatePlayerInputForm extends React.Component {
 class PlayerInputContainer extends React.Component {
     constructor(props){
         super(props);
-        this.state ={}
-        // this.props.numPlayers = 0;
+        this.state ={pokePerTeam: ''}
+
+
+        this.RenderPlayerNameInput = this.RenderPlayerNameInput.bind(this);
+        this.handleChange = this.handleChange.bind(this);
     }
 
     RenderPlayerNameInput(numInputs){
@@ -61,14 +64,25 @@ class PlayerInputContainer extends React.Component {
         return inputs;
     }
 
+    handleChange(event){
+        this.setState({
+            pokePerTeam: event.target.pokePerTeam,
+        });
+    }
+
+    
+
     render(){
         const inputs = this.RenderPlayerNameInput(this.props.numPlayers);
         return(
+            <div>
             <div className="contain">
             <h6 className="newTitle">Please enter all the players</h6>
             {inputs}
             <h6>What is the maximum amount of pokemon per player?</h6>
-            <input type="text" className="teamMax"/>
+            <input type="text" className="teamMax" value={this.state.pokePerTeam} onChange={this.handleChange}/>
+            </div>
+            <button className="userButton">Generate Players!</button>
             </div>
         );
     }
@@ -96,11 +110,11 @@ class PlayerCardContainer extends React.Component {
     }
 
     render(){
-
+        const cards = this.createCards(this.props.numCards, this.props.name);
 
         return(
           <div className="cardContainer row mx-auto">
-
+              {cards}
           </div>
         );
     }
@@ -160,7 +174,6 @@ class MainContainer extends React.Component {
                     <div id="users"></div>
                     <CreatePlayerInputForm/>
                     <div>
-                        <button className="userButton">Generate Players!</button>
                     </div>
                     <div>
                         <h3 id="randTitle">Please Enter the list of pokemon line by line</h3>
