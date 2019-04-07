@@ -46,7 +46,6 @@ class PlayerInputContainer extends React.Component {
 
     }
 
-
     renderPlayerNameInput(numInputs){
         let inputs = [];
         for (let i = 0; i < numInputs; i++){
@@ -70,7 +69,6 @@ class PlayerInputContainer extends React.Component {
 
 class PlayerNameInput extends React.Component {
 
-
     render(){
         return(
           <div>
@@ -82,7 +80,72 @@ class PlayerNameInput extends React.Component {
     }
 }
 
+class PlayerCardContainer extends React.Component {
+
+    createCards(numCards, name){
+        let cards = [];
+
+        for (let i = 0; i < numCards; i++){
+            cards.push(<Card playerName={name}/>);
+        }
+        return cards;
+    }
+
+    render(){
+
+
+        return(
+          <div className="cardContainer row mx-auto">
+
+          </div>
+        );
+    }
+}
+
+class Card extends React.Component {
+    constructor(props){
+        super(props);
+
+    }
+
+    render(){
+
+        return(
+          <div className="card col-sm-4">
+            <h6>{this.props.playerName}</h6>
+
+          </div>
+        );
+    }
+}
+
+class PokemonList extends React.Component{
+
+
+    render(){
+
+        return(
+            <div>
+                <ul>
+
+                </ul>
+            </div>
+        );
+    }
+}
+
+
 class MainContainer extends React.Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            isReset: false,
+            numPlayers: 0
+        };
+
+
+
+    }
 
     render(){
         return(
