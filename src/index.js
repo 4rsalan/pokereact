@@ -18,6 +18,7 @@ class CreatePlayerInputForm extends React.Component {
     handleChange(event){
         this.setState({
             value: event.target.value,
+            isClicked: false
         });
     }
 
@@ -38,8 +39,8 @@ class CreatePlayerInputForm extends React.Component {
             <div>
                 <input type="text" id="playerCount" name="NumberPlayers" value={this.state.value} onChange={this.handleChange}/>
                 <button id="create" onClick={() => this.setState({isClicked: !this.state.isClicked})}>Create Players!</button>
-                {isClicked ? this.renderPlayerInputContainer(4) : null }
                 <button id="reset" onClick={() => this.setState({isClicked: false})}>Reset All</button>
+                {isClicked ? this.renderPlayerInputContainer(this.state.value) : null }
             </div>
         );
     }
@@ -63,9 +64,10 @@ class PlayerInputContainer extends React.Component {
     render(){
         const inputs = this.RenderPlayerNameInput(this.props.numPlayers);
         return(
-            <div>
-            <h6>What is the maximum amount of pokemon per player?</h6>
+            <div className="contain">
+            <h6 className="newTitle">Please enter all the players</h6>
             {inputs}
+            <h6>What is the maximum amount of pokemon per player?</h6>
             <input type="text" className="teamMax"/>
             </div>
         );
@@ -77,10 +79,7 @@ class PlayerNameInput extends React.Component {
 
     render(){
         return(
-          <div>
-              <h6 className="newTitle">Please enter all the players</h6>
               <input type="text" className="userInput"/>
-          </div>
         );
     }
 }
