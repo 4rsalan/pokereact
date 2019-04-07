@@ -2,12 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './style.css';
 
+
 class CreatePlayerInputForm extends React.Component {
     constructor(props){
         super(props);
         this.state = {
             value: '',
-            inputs: []
+            isClicked: false
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -25,16 +26,20 @@ class CreatePlayerInputForm extends React.Component {
     }
 
     renderPlayerInputContainer(numInputs){
-
-        return <PlayerInputContainer/>;
+        return <PlayerInputContainer numPlayers={numInputs}/>;
     }
 
     render(){
+        const inputContainer = this.renderPlayerInputContainer(this.state.value);
+        const { isClicked, value } = { ...this.state };
+        console.log("What is my state value", isClicked);
+        console.log("What is my value, ", value);
         return(
             <div>
                 <input type="text" id="playerCount" name="NumberPlayers" value={this.state.value} onChange={this.handleChange}/>
-                <button id="create" onClick={this.renderPlayerInputContainer(this.state.value)}>Create Players!</button>
-                <button id="reset">Reset All</button>
+                <button id="create" onClick={() => this.setState({isClicked: !this.state.isClicked})}>Create Players!</button>
+                {isClicked ? this.renderPlayerInputContainer(4) : null }
+                <button id="reset" onClick={() => this.setState({isClicked: false})}>Reset All</button>
             </div>
         );
     }
@@ -43,10 +48,11 @@ class CreatePlayerInputForm extends React.Component {
 class PlayerInputContainer extends React.Component {
     constructor(props){
         super(props);
-
+        this.state ={}
+        // this.props.numPlayers = 0;
     }
 
-    renderPlayerNameInput(numInputs){
+    RenderPlayerNameInput(numInputs){
         let inputs = [];
         for (let i = 0; i < numInputs; i++){
             inputs.push(<PlayerNameInput/>);
@@ -55,11 +61,11 @@ class PlayerInputContainer extends React.Component {
     }
 
     render(){
-
-
+        const inputs = this.RenderPlayerNameInput(this.props.numPlayers);
         return(
             <div>
-
+            <h6>What is the maximum amount of pokemon per player?</h6>
+            {inputs}
             <input type="text" className="teamMax"/>
             </div>
         );
@@ -74,7 +80,6 @@ class PlayerNameInput extends React.Component {
           <div>
               <h6 className="newTitle">Please enter all the players</h6>
               <input type="text" className="userInput"/>
-              <h6>What is the maximum amount of pokemon per player?</h6>
           </div>
         );
     }
