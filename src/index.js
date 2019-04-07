@@ -1,12 +1,118 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import './style.css';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+class CreatePlayerInputForm extends React.Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            value: '',
+            inputs: []
+        };
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+        this.handleChange = this.handleChange.bind(this);
+        this.renderPlayerInputContainer = this.renderPlayerInputContainer.bind(this);
+    }
+
+    handleChange(event){
+        this.setState({
+            value: event.target.value,
+        });
+    }
+
+    handleSubmit(event){
+        this.setState({inputs: Array(event.target.value).fill(null)})
+    }
+
+    renderPlayerInputContainer(numInputs){
+
+        return <PlayerInputContainer/>;
+    }
+
+    render(){
+        return(
+            <div>
+                <input type="text" id="playerCount" name="NumberPlayers" value={this.state.value} onChange={this.handleChange}/>
+                <button id="create" onClick={this.renderPlayerInputContainer(this.state.value)}>Create Players!</button>
+                <button id="reset">Reset All</button>
+            </div>
+        );
+    }
+}
+
+class PlayerInputContainer extends React.Component {
+    constructor(props){
+        super(props);
+
+    }
+
+
+    renderPlayerNameInput(numInputs){
+        let inputs = [];
+        for (let i = 0; i < numInputs; i++){
+            inputs.push(<PlayerNameInput/>);
+        }
+        return inputs;
+    }
+
+    render(){
+
+
+        return(
+            <div>
+
+            <input type="text" className="teamMax"/>
+            </div>
+        );
+    }
+
+}
+
+class PlayerNameInput extends React.Component {
+
+
+    render(){
+        return(
+          <div>
+              <h6 className="newTitle">Please enter all the players</h6>
+              <input type="text" className="userInput"/>
+              <h6>What is the maximum amount of pokemon per player?</h6>
+          </div>
+        );
+    }
+}
+
+class MainContainer extends React.Component {
+
+    render(){
+        return(
+            <div>
+                <h1 className="text-center">Pokemon Randomizer!!</h1>
+                <div className="container text-center">
+                    <h3>How many players are there?</h3>
+                    <div id="users"></div>
+                    <CreatePlayerInputForm/>
+                    <div>
+                        <button className="userButton">Generate Players!</button>
+                    </div>
+                    <div>
+                        <h3 id="randTitle">Please Enter the list of pokemon line by line</h3>
+                        <textarea id="list"></textarea>
+                        <div>
+                            <button id="randomize">Randomize!</button>
+                        </div>
+                    </div>
+
+                    <div id="userContainer"></div>
+
+                </div>
+            </div>
+        );
+    }
+}
+
+
+ReactDOM.render(
+    <MainContainer/>,
+    document.getElementById('root')
+);
