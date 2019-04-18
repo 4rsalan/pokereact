@@ -8,7 +8,8 @@ class CreatePlayerInputForm extends React.Component {
         super(props);
         this.state = {
             value: '',
-            isClicked: false
+            isClicked: false,
+            names: []
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -49,31 +50,58 @@ class CreatePlayerInputForm extends React.Component {
 class PlayerInputContainer extends React.Component {
     constructor(props){
         super(props);
-        this.state ={pokePerTeam: ''}
+        this.state ={pokePerTeam: '',
+                     names: [],
+                     isClicked: false
+        };
 
 
         this.RenderPlayerNameInput = this.RenderPlayerNameInput.bind(this);
         this.handleChange = this.handleChange.bind(this);
+        this.renderPlayerCardContainer = this.renderPlayerCardContainer.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     RenderPlayerNameInput(numInputs){
         let inputs = [];
         for (let i = 0; i < numInputs; i++){
-            inputs.push(<PlayerNameInput/>);
+            inputs.push(<PlayerNameInput key={i} name={i}/>);
         }
         return inputs;
+    }
+
+    renderPlayerCardContainer(numCards, names){
+        return <PlayerCardContainer numCards={numCards} names={names} />
     }
 
     handleChange(event){
         this.setState({
             pokePerTeam: event.target.pokePerTeam,
+            
         });
     }
 
-    
+    handleSubmit(event){
+        this.setState({
+            isClicked: true,
+            pokePerTeam: event.target.pokePerTeam,
+        });
+    }
+
+
 
     render(){
-        const inputs = this.RenderPlayerNameInput(this.props.numPlayers);
+        const {isClicked, pokePerTeam, names} = { ...this.state};
+
+        const inputs = [];
+        if (this.props.numPlayers <= 0 || isNaN(this.props.numPlayers)){
+            return <h5 className={"mt-2 text-danger bg-dark"}>Please enter a valid amount of players</h5>
+        }
+        else{
+          inputs.push(this.RenderPlayerNameInput(this.props.numPlayers));
+        }
+
+
         return(
             <div>
             <div className="contain">
@@ -82,7 +110,8 @@ class PlayerInputContainer extends React.Component {
             <h6>What is the maximum amount of pokemon per player?</h6>
             <input type="text" className="teamMax" value={this.state.pokePerTeam} onChange={this.handleChange}/>
             </div>
-            <button className="userButton">Generate Players!</button>
+            <button className="userButton" onClick={this.handleSubmit}>Generate Players!</button>
+            {isClicked ? this.renderPlayerCardContainer(this.props.numPlayers, this.state.names) : null }
             </div>
         );
     }
@@ -99,23 +128,40 @@ class PlayerNameInput extends React.Component {
 }
 
 class PlayerCardContainer extends React.Component {
+    constructor(props){
+        super(props);
 
-    createCards(numCards, name){
+    }
+
+
+    createCards(numCards, names){
         let cards = [];
 
         for (let i = 0; i < numCards; i++){
-            cards.push(<Card playerName={name}/>);
+            cards.push(<Card name={i} playerName={names[i]}/>);
+            console.log(names[i]);
         }
         return cards;
     }
 
     render(){
-        const cards = this.createCards(this.props.numCards, this.props.name);
+        const cards = this.createCards(this.props.numCards, this.props.names);
 
         return(
-          <div className="cardContainer row mx-auto">
-              {cards}
-          </div>
+            <div>
+                <div>
+                    <h3 id="randTitle">Please Enter the list of pokemon line by line</h3>
+                    <textarea id="list"></textarea>
+                    <div>
+                        <button id="randomize">Randomize!</button>
+                    </div>
+                </div>
+                <div id="userContainer">
+                    <div className="cardContainer row mx-auto">
+                        {cards}
+                    </div>
+                </div>
+            </div>
         );
     }
 }
@@ -123,7 +169,6 @@ class PlayerCardContainer extends React.Component {
 class Card extends React.Component {
     constructor(props){
         super(props);
-
     }
 
     render(){
@@ -161,8 +206,6 @@ class MainContainer extends React.Component {
             numPlayers: 0
         };
 
-
-
     }
 
     render(){
@@ -175,15 +218,7 @@ class MainContainer extends React.Component {
                     <CreatePlayerInputForm/>
                     <div>
                     </div>
-                    <div>
-                        <h3 id="randTitle">Please Enter the list of pokemon line by line</h3>
-                        <textarea id="list"></textarea>
-                        <div>
-                            <button id="randomize">Randomize!</button>
-                        </div>
-                    </div>
 
-                    <div id="userContainer"></div>
 
                 </div>
             </div>
