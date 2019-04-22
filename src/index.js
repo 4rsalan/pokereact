@@ -23,10 +23,6 @@ class CreatePlayerInputForm extends React.Component {
         });
     }
 
-    handleSubmit(event){
-        this.setState({inputs: Array(event.target.value).fill(null)})
-    }
-
     renderPlayerInputContainer(numInputs){
         return <PlayerInputContainer numPlayers={numInputs}/>;
     }
@@ -52,7 +48,8 @@ class PlayerInputContainer extends React.Component {
         super(props);
         this.state ={pokePerTeam: '',
                      names: [],
-                     isClicked: false
+                     isClicked: false,
+                     numPlayers: this.props.numPlayers
         };
 
 
@@ -60,12 +57,19 @@ class PlayerInputContainer extends React.Component {
         this.handleChange = this.handleChange.bind(this);
         this.renderPlayerCardContainer = this.renderPlayerCardContainer.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleNameInputs = this.handleNameInputs.bind(this);
     }
+
+    componentWillMount(){
+        //console.log(this.state.names);
+        //console.log(this.state.numPlayers);
+        //console.log("HELLO");
+    };
 
     RenderPlayerNameInput(numInputs){
         let inputs = [];
         for (let i = 0; i < numInputs; i++){
-            inputs.push(<PlayerNameInput key={i} name={i}/>);
+            inputs.push(<input type="text" key={i} onBlur={this.handleNameInputs} name={i} className="userInput"/>);
         }
         return inputs;
     }
@@ -77,8 +81,12 @@ class PlayerInputContainer extends React.Component {
     handleChange(event){
         this.setState({
             pokePerTeam: event.target.pokePerTeam,
-            
         });
+        console.log(this.state.pokePerTeam);
+    }
+
+    handleNameInputs(event){
+
     }
 
     handleSubmit(event){
@@ -88,11 +96,9 @@ class PlayerInputContainer extends React.Component {
         });
     }
 
-
-
     render(){
         const {isClicked, pokePerTeam, names} = { ...this.state};
-
+        console.log(isClicked, pokePerTeam, names);
         const inputs = [];
         if (this.props.numPlayers <= 0 || isNaN(this.props.numPlayers)){
             return <h5 className={"mt-2 text-danger bg-dark"}>Please enter a valid amount of players</h5>
@@ -108,10 +114,10 @@ class PlayerInputContainer extends React.Component {
             <h6 className="newTitle">Please enter all the players</h6>
             {inputs}
             <h6>What is the maximum amount of pokemon per player?</h6>
-            <input type="text" className="teamMax" value={this.state.pokePerTeam} onChange={this.handleChange}/>
+            <input type="text" className="teamMax" value={pokePerTeam} onChange={this.handleChange}/>
             </div>
             <button className="userButton" onClick={this.handleSubmit}>Generate Players!</button>
-            {isClicked ? this.renderPlayerCardContainer(this.props.numPlayers, this.state.names) : null }
+            {isClicked ? this.renderPlayerCardContainer(this.props.numPlayers, names) : null }
             </div>
         );
     }
@@ -172,11 +178,10 @@ class Card extends React.Component {
     }
 
     render(){
-
         return(
           <div className="card col-sm-4">
-            <h6>{this.props.playerName}</h6>
-
+            <h6>Test User</h6>
+                <PokemonList/>
           </div>
         );
     }
@@ -186,11 +191,14 @@ class PokemonList extends React.Component{
 
 
     render(){
-
         return(
             <div>
                 <ul>
-
+                    <li>Pikachu</li>
+                    <li>Pichu</li>
+                    <li>Lucario</li>
+                    <li>Torchic</li>
+                    <li>Rhydon</li>
                 </ul>
             </div>
         );
