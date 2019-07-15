@@ -11,13 +11,15 @@ class PlayerInfoContainer extends React.Component {
             listPokemon: [],
             sortedPokemon: [],
             inputFields: [],
-            isClicked: false
+            isClicked: false,
+            error: false
         };
     }
 
     handleChange = (event)=>{
         this.setState({
             numPokemonPerTeam: event.target.value,
+            isClicked: false
         });
         console.log(this.state.numPokemonPerTeam);
     };
@@ -62,8 +64,17 @@ class PlayerInfoContainer extends React.Component {
         }
     }
 
+    SubmissionHandler = () => {
+        if (this.state.numPokemonPerTeam <= 0 || isNaN(this.state.numPokemonPerTeam)) {
+            this.setState({error: true});
+        }
+        else{
+            this.setState({isClicked: true});
+        }
+    };
+
     render(){
-        const {isClicked, inputFields} = { ...this.state};
+        const {isClicked, inputFields, error} = { ...this.state};
         if (this.props.numPlayers <= 0 || isNaN(this.props.numPlayers)){
             return <h5 className={"mt-2 text-danger bg-dark"}>Please enter a valid amount of players</h5>
         }
@@ -79,7 +90,8 @@ class PlayerInfoContainer extends React.Component {
                     <h3 id="randTitle">Please Enter the list of pokemon line by line</h3>
                     <textarea id="list" value={this.state.listPokemon} onChange={this.TextAreaHandler}/>
                     <div>
-                        <button id="randomize" onClick={() => this.setState({isClicked: true})}>Randomize!</button>
+                        <button id="randomize" onClick={this.SubmissionHandler}>Randomize!</button>
+                        {error ? this.RenderCardContainer(this.state.players, this.state.listPokemon, this.state.numPokemonPerTeam) : null }
                     </div>
                 </div>
                 {isClicked ? this.RenderCardContainer(this.state.players, this.state.listPokemon, this.state.numPokemonPerTeam) : null }

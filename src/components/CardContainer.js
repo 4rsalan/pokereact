@@ -45,6 +45,9 @@ class CardContainer extends React.Component {
     };
 
     render(){
+        if (this.props.maxPokemon <= 0 || isNaN(this.props.maxPokemon)){
+            return <h5 className={"mt-2 text-danger bg-dark"}>Please enter a valid number for the maximum amount of pokemon</h5>
+        }
         const rand = this.shuffle(this.props.pokemon.split("\n"));
         const teams = this.chunkArray(rand, this.props.maxPokemon);
         const cards = this.Randomize(this.props.playerNames.length, teams, this.props.playerNames);

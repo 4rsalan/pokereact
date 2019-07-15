@@ -19,8 +19,6 @@ class MainContainer extends React.Component {
                     <InputContainer/>
                     <div>
                     </div>
-
-
                 </div>
             </div>
         );
